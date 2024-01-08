@@ -16,15 +16,20 @@ $result =  $conn->query($select_all);
 //TODO: add data to db through form. table content: id, name, calories, cost, weight, calories/cost, calories/weight
 //TODO: fetch data
 
+/*
+Do programu wrzucamy nazwę produktu, jego wagę całkowitą, cenę za sztukę oraz liczbę kalorii na 100 gram. 
+Program liczy ile kalorii dostaniemy za złotówkę, oraz ile kalorii znajduje się w jednym gramie produktu
+*/
+
 echo'<table> 
 <th>ID</th>
 <th>Name</th>
 <th>Calories</th>
 <th>Cost</th>
-<th>Weight</th>
-<th>Calories/Cost</th>
-<th>Calories/Weight</th>
-';
+<th>Weight[g]</th>
+<th>Calories per 1PLN</th>
+<th>Calories per 1 gram</th>
+'; //kalorie w całym produkcie[kalorie na gram razy waga]
 
 while($row = $result->fetch_assoc()){
     echo'<tr>';
@@ -43,13 +48,13 @@ echo'</table>';
 ?>
 <form action="insert.php" method="post">
 
-    NAME: <input type="text" id="name" name="name">
+    NAME: <input type="text" id="name" name="name"> [char]
     <br>
-    KCAL: <input type="text" id="kcal" name="kcal">
+    KCAL: <input type="text" id="kcal" name="kcal"> [int[kcal/100g]]
     <br>
-    COST: <input type="text" id="cost" name="cost">
+    COST: <input type="text" id="cost" name="cost">[float[pln]]
     <br>
-    WEIGHT: <input type="text" id="weight" name="weight">
+    WEIGHT: <input type="text" id="weight" name="weight">[float[g]]
     <br>
     <input type="submit" value="UPLOAD">
 </form>
