@@ -9,7 +9,7 @@
 <body>
 <?php
 require("db_connect.php");
-$select_all = "SELECT * FROM main";
+$select_all = "SELECT * FROM main ORDER BY name";
 $result =  $conn->query($select_all); 
 
 
@@ -29,9 +29,11 @@ echo'<table>
 <th>Weight[g]</th>
 <th>Calories per 1PLN</th>
 <th>Calories per 1 gram</th>
+<th>Whole calories</th>
 '; //kalorie w całym produkcie[kalorie na gram razy waga]
 
 while($row = $result->fetch_assoc()){
+    $entry_id = $row['id'];
     echo'<tr>';
 
     echo'<td>' . $row['id'] . '</td>';
@@ -41,7 +43,12 @@ while($row = $result->fetch_assoc()){
     echo'<td>' . $row['Weight'] . '</td>';
     echo'<td>' . $row['Calories/Cost'] . '</td>';
     echo'<td>' . $row['Calories/Weight'] . '</td>';
-
+    echo'<td>' . $row['whole_calories'] . '</td>';
+    echo'<td>';
+    echo'<form action="delete.php"></form>
+    <input type="hidden" name="id" value="<?=$entry_id?>">
+    <button class="exit">x</button>';
+    echo'</td>';
     echo'</tr>';
 }
 echo'</table>';
